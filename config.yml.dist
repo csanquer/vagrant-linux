@@ -3,6 +3,7 @@ memory: 1024
 cpus: 2
 
 # box: "centos/7"
+# box: "debian/jessie64"
 box: "ubuntu/xenial64"
 
 private_ip: 192.168.33.10

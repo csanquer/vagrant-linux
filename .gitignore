@@ -1,3 +1,4 @@
 /share/
 *.log
 /.vagrant/
+/config.yml
