@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 require 'yaml'
-vmconfig = YAML::load(File.open('config.yml'))
+vmconfig = YAML::load(File.open(File.exists?('config.yml') ? 'config.yml' : 'config.yml.dist' ))
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
