@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: vmconfig['disable_default_share']
 
   vmconfig['shared_folders'].each do |value|
-    config.vm.synced_folder value['host_path'], value['guest_path'], create: true, :nfs => true
+    config.vm.synced_folder value['host_path'], value['guest_path'], create: true, :nfs => value['nfs']
   end
 
 
@@ -78,4 +78,5 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", path: "scripts/user_config.sh", privileged: false
+  config.vm.provision "shell", path: "scripts/install.sh"
 end

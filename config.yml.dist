@@ -8,13 +8,18 @@ box: "ubuntu/xenial64"
 
 private_ip: 192.168.33.10
 
+# your config files from vagrant host to copy to vagrant VM guest
 gitconfig: "~/.gitconfig"
 ssh_private_key: "~/.ssh/id_rsa"
 ssh_public_key: "~/.ssh/id_rsa.pub"
 
+# disabling default /vagrant share folder
 disable_default_share: true
+
+# vagrant sync folder
 shared_folders:
   -
     host_path: ./share
     # guest_path: /home/vagrant/share
     guest_path: /home/ubuntu/share
+    nfs: true
