@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# load config from YAML file config.yml or if not present config.yml.dist 
 require 'yaml'
 vmconfig = YAML::load(File.open(File.exists?('config.yml') ? 'config.yml' : 'config.yml.dist' ))
 
@@ -12,9 +13,7 @@ Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
+  
   config.vm.box = vmconfig['box']
 
   # Disable automatic box update checking. If you disable this, then
@@ -36,11 +35,7 @@ Vagrant.configure("2") do |config|
   # your network.
   # config.vm.network "public_network"
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-
+  # disable auto share
   config.vm.synced_folder ".", "/vagrant", disabled: vmconfig['disable_default_share']
 
   vmconfig['shared_folders'].each do |value|
@@ -48,10 +43,6 @@ Vagrant.configure("2") do |config|
   end
 
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
     # vb.gui = true
@@ -60,23 +51,31 @@ Vagrant.configure("2") do |config|
     vb.memory = vmconfig['memory']
     vb.cpus = vmconfig['cpus']
   end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
-
+  # TODO fix vagrant box image
+  # ensure ansible is correctly installed
+  config.vm.provision "shell", path: "scripts/ansinble.sh"
+  
+  # provision VM with ansible
+  config.vm.provision "file", source: 'ansible', destination: "/home/vagrant/ansible"
+  
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.provisioning_path = "/home/vagrant/ansible"
+    ansible.inventory_path =  "/home/vagrant/ansible/inventory"
+    ansible.playbook = "main.yml"
+    ansible.limit = 'localhost'
+    ansible.verbose = true
+  end
+  
+  # get user host git config and ssh key pair
   config.vm.provision "file", source: vmconfig['gitconfig'], destination: ".gitconfig"
   config.vm.provision "file", source: vmconfig['ssh_private_key'], destination: ".ssh/id_rsa"
   config.vm.provision "file", source: vmconfig['ssh_public_key'], destination: ".ssh/id_rsa.pub"
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
+
+  # configure user vagrant (no sudo)
   config.vm.provision "shell", path: "scripts/user_config.sh", privileged: false
-  config.vm.provision "shell", path: "scripts/install.sh"
+  
+  # cleanup
+  config.vm.provision "shell", path: "scripts/cleanup.sh"
+  
 end

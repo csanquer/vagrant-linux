@@ -2,12 +2,9 @@
 memory: 1024
 cpus: 2
 
-# box: "centos/7"
-# box: "debian/jessie64"
-#box: "ubuntu/xenial64"
-box: "boxcutter/ubuntu1604"
+box: "csanquer/ubuntu-docker"
 
-private_ip: 192.168.33.10
+private_ip: 192.168.50.100
 
 # your config files from vagrant host to copy to vagrant VM guest
 gitconfig: "~/.gitconfig"
@@ -21,6 +18,5 @@ disable_default_share: true
 shared_folders:
   -
     host_path: ./share
-    # guest_path: /home/vagrant/share
-    guest_path: /home/ubuntu/share
+    guest_path: /home/vagrant/share
     nfs: true
