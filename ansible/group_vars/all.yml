@@ -115,12 +115,12 @@ account_users:
 samba_users:
   vagrant: vagrant
 
-samba_shares:
-  -
-    name: public
-    path: /home/vagrant/public
-    owner: vagrant
-    group: vagrant
+# samba_shares:
+#   -
+#     name: public
+#     path: /home/vagrant/public
+#     owner: vagrant
+#     group: vagrant
 
 # nfs_exports_enabled: true
 # nfs_exports:
