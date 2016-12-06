@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
     ansible.inventory_path =  "/home/vagrant/ansible/inventory"
     ansible.playbook = "main.yml"
     ansible.limit = 'localhost'
-    ansible.verbose = true
+    ansible.verbose = false
   end
   
   # get user host git config and ssh key pair

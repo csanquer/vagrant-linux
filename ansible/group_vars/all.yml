@@ -45,56 +45,58 @@ network_hosts:
 #     gid: 998
 #     system: true
 
-# account_users:
-#   vagrant:
-#     name: vagrant
-#     comment: 'Vagrant default user'
-#     group: vagrant
-#     groups:
-#       - adm
-#       - cdrom
-#       - sudo
-#       - dip
-#       - plugdev
-#       - lpadmin
-#       - sambashare
-#     # uid: 900
-#     config_files:
-#       -
-#         src: home/{{ ansible_os_family|lower }}/.bashrc.j2
-#         dest: .bashrc
-#         backup: yes
-#         force: yes
-#       -
-#         src: home/.bash_aliases.j2
-#         dest: .bash_aliases
-#         backup: yes
-#         force: yes
-#       -
-#         src: home/.zshrc.j2
-#         dest: .zshrc
-#         backup: yes
-#         force: yes
-#       -
-#         src: etc/skel/.git-prompt-colors.sh.j2
-#         dest: .git-prompt-colors.sh
-#         backup: yes
-#         force: no
-#       -
-#         src: etc/skel/.gitconfig.j2
-#         dest: .gitconfig
-#         backup: yes
-#         force: no
-#       -
-#         src: etc/skel/.gitignore.j2
-#         dest: .gitignore
-#         backup: yes
-#         force: no
-#     gitconfig: []
-#       # - { name: 'user.name', option: 'Martin Dupond'}
-#       # - { name: 'user.email', option: 'martin.dupond@example.com'}
-#     bash_aliases: {}
-#       # <alias>: <command>
+account_users:
+  vagrant:
+    name: vagrant
+    comment: 'Vagrant default user'
+    group: vagrant
+    # groups:
+    #   - adm
+    #   - cdrom
+    #   - sudo
+    #   - dip
+    #   - plugdev
+    #   - lpadmin
+    #   - sambashare
+    # uid: 900
+    config_files:
+      -
+        src: home/{{ ansible_os_family|lower }}/.bashrc.j2
+        dest: .bashrc
+        backup: yes
+        force: yes
+      -
+        src: home/.bash_aliases.j2
+        dest: .bash_aliases
+        backup: yes
+        force: yes
+      -
+        src: home/.zshrc.j2
+        dest: .zshrc
+        backup: yes
+        force: yes
+      -
+        src: etc/skel/.git-prompt-colors.sh.j2
+        dest: .git-prompt-colors.sh
+        backup: yes
+        force: no
+      -
+        src: etc/skel/.gitconfig.j2
+        dest: .gitconfig
+        backup: yes
+        force: no
+      -
+        src: etc/skel/.gitignore.j2
+        dest: .gitignore
+        backup: yes
+        force: no
+    color_prompt: yes
+    ssh_agent_autostart: yes
+    gitconfig: []
+      # - { name: 'user.name', option: 'Martin Dupond'}
+      # - { name: 'user.email', option: 'martin.dupond@example.com'}
+    bash_aliases: {}
+      # <alias>: <command>
 
 # account_env_vars:
 #   vagrant: {}

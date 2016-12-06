@@ -7,7 +7,7 @@
 
   roles:
     - packages
-    # - account
+    - account
     - locales
     - samba
-    # - nfs
+    - nfs
