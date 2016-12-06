@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# load config from YAML file config.yml or if not present config.yml.dist 
+# load config from YAML file config.yml or if not present config.yml.dist
 require 'yaml'
 vmconfig = YAML::load(File.open(File.exists?('config.yml') ? 'config.yml' : 'config.yml.dist' ))
 
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
 
   # TODO fix vagrant box image
   # ensure ansible is correctly installed
-  config.vm.provision "shell", path: "scripts/ansinble.sh"
+  config.vm.provision "shell", path: "scripts/ansible.sh"
   
   # provision VM with ansible
   config.vm.provision "file", source: 'ansible', destination: "/home/vagrant/ansible"
