@@ -50,14 +50,15 @@ account_users:
     name: vagrant
     comment: 'Vagrant default user'
     group: vagrant
-    # groups:
-    #   - adm
-    #   - cdrom
-    #   - sudo
-    #   - dip
-    #   - plugdev
-    #   - lpadmin
-    #   - sambashare
+    groups:
+      - adm
+      - cdrom
+      - sudo
+      - dip
+      - plugdev
+      - lpadmin
+      - sambashare
+      - docker
     # uid: 900
     config_files:
       -

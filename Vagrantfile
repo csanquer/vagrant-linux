@@ -67,10 +67,10 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.provision "shell", path: "scripts/setup.sh"
-
+    
     # provision VM with ansible
     config.vm.provision "file", source: 'ansible', destination: "/home/vagrant/ansible"
-
+    
     config.vm.provision "ansible_local" do |ansible|
         ansible.provisioning_path = "/home/vagrant/ansible"
         ansible.inventory_path =  "/home/vagrant/ansible/inventory"
@@ -78,14 +78,20 @@ Vagrant.configure("2") do |config|
         ansible.limit = 'localhost'
         ansible.verbose = false
     end
-
+    
     # get user host git config and ssh key pair
     config.vm.provision "file", source: vmconfig['gitconfig'], destination: ".gitconfig"
     config.vm.provision "file", source: vmconfig['ssh_private_key'], destination: ".ssh/id_rsa"
     config.vm.provision "file", source: vmconfig['ssh_public_key'], destination: ".ssh/id_rsa.pub"
 
     # configure user vagrant (no sudo)
-    config.vm.provision "shell", path: "scripts/user_config.sh", privileged: false
+    config.vm.provision "shell",
+        path: "scripts/user_config.sh",
+        privileged: false,
+        env: {
+            "DOCKER_HUB_LOGIN" => vmconfig['docker_hub_login'],
+            "DOCKER_HUB_PASSWORD" => vmconfig['docker_hub_password']
+        }
 
     # cleanup
     config.vm.provision "shell", path: "scripts/cleanup.sh"

@@ -1,15 +1,22 @@
 ---
+  #virtual configuration
 memory: 1024
 cpus: 2
 
+# vagrant box to use
 box: "csanquer/ubuntu-docker"
 
+# private network IP 
 private_ip: 192.168.50.100
 
 # your config files from vagrant host to copy to vagrant VM guest
 gitconfig: "~/.gitconfig"
 ssh_private_key: "~/.ssh/id_rsa"
 ssh_public_key: "~/.ssh/id_rsa.pub"
+
+# docker hub authentication
+docker_hub_login:
+docker_hub_password:
 
 # disabling default /vagrant share folder
 disable_default_share: true
