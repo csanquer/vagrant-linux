@@ -66,9 +66,7 @@ Vagrant.configure("2") do |config|
         vb.cpus = vmconfig['cpus']
     end
 
-    # TODO fix vagrant box image
-    # ensure ansible is correctly installed
-    config.vm.provision "shell", path: "scripts/ansible.sh"
+    config.vm.provision "shell", path: "scripts/setup.sh"
 
     # provision VM with ansible
     config.vm.provision "file", source: 'ansible', destination: "/home/vagrant/ansible"
