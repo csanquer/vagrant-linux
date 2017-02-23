@@ -1,0 +1,33 @@
+[submodule "ansible/roles/account"]
+	path = ansible/roles/account
+	url = https://github.com/csanquer/ansible-role-account.git
+[submodule "ansible/roles/packages"]
+	path = ansible/roles/packages
+	url = https://github.com/csanquer/ansible-role-packages.git
+[submodule "ansible/roles/python"]
+	path = ansible/roles/python
+	url = https://github.com/csanquer/ansible-role-python.git
+[submodule "ansible/roles/locales"]
+	path = ansible/roles/locales
+	url = https://github.com/csanquer/ansible-role-locales.git
+[submodule "ansible/roles/samba"]
+	path = ansible/roles/samba
+	url = https://github.com/csanquer/ansible-role-samba.git
+[submodule "ansible/roles/nfs"]
+	path = ansible/roles/nfs
+	url = https://github.com/csanquer/ansible-role-nfs.git
+[submodule "ansible/roles/docker"]
+	path = ansible/roles/docker
+	url = https://github.com/csanquer/ansible-role-docker.git
+[submodule "ansible/roles/sshd"]
+	path = ansible/roles/sshd
+	url = https://github.com/csanquer/ansible-role-sshd.git
+[submodule "ansible/roles/network"]
+	path = ansible/roles/network
+	url = https://github.com/csanquer/ansible-role-network.git
+[submodule "ansible/roles/oh-my-zsh"]
+	path = ansible/roles/oh-my-zsh
+	url = https://github.com/csanquer/ansible-role-oh-my-zsh.git
+[submodule "ansible/roles/vagrant-tools"]
+	path = ansible/roles/vagrant-tools
+	url = https://github.com/csanquer/ansible-role-vagrant-tools.git
