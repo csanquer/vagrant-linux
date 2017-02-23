@@ -60,6 +60,7 @@ account_users:
       - sambashare
       - docker
     # uid: 900
+    shell: /bin/bash
     config_files:
       -
         src: home/{{ ansible_os_family|lower }}/.bashrc.j2
